@@ -38,34 +38,34 @@ class Class_Training(models.Model):
             return self.class_name, self.trainer
             
 
-class ReportLog(models.CompositeField):
-    class_ID = models.IntegerField
-    hero_ID = models.IntegerField
-    outcome = models.CharField(max_length = 1, choices = OUTCOME_CHOICES)
-    comments = models.TextField
-    trainer = models.IntegerField
-    
+class ReportLog(models.Model):
     class Meta:
-        db_type = 'report'
+        unique_together= (('class_ID', 'hero_ID', 'trainer'),)
+        
+    class_ID = models.IntegerField()
+    hero_ID = models.IntegerField()
+    outcome = models.CharField(max_length = 1, choices = OUTCOME_CHOICES)
+    comments = models.TextField()
+    trainer = models.IntegerField()
+    
+    
             
-class Attendance(models.CompositeField):
-    class_ID = models.IntegerField
-    hero_ID = models.IntegerField
+class Attendance(models.Model):
+    class Meta:
+        unique_together = (('class_ID','hero_ID'))
+    
+    class_ID = models.IntegerField()
+    hero_ID = models.IntegerField()
     room_name = models.CharField(max_length = 30)
     date = models.DateField
     start_time = models.TimeField
     end_time = models.TimeField
         
-    class Meta:
-        db_type = 'attendance'
+    
             
 class Room(models.Model):
     room_name = models.CharField(max_length = 20)
     
-class Hero(models.Model):
-    codename = models.CharField(max_length = 20)
-    
-    def __str__(self):
-        return self.codename
+
 
     
