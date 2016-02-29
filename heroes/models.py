@@ -1,20 +1,8 @@
-from django_pg import models
+#from django_pg import models
+
+from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-
-STATS_CHOICES = (
-    ('1', 'Extremely Low'),
-    ('2', 'Very Low'),
-    ('3', 'Low'),
-    ('4', 'Average'),
-    ('5', 'Good'),
-    ('6', 'Above Average'),
-    ('7', 'High'),
-    ('8', 'Very High'),
-    ('9', 'Super Human'),
-    ('10', 'Above and Beyond'),
-
-)
 
 class Hero(models.Model):
     codename = models.CharField(max_length = 20)
@@ -37,6 +25,19 @@ class HeroStats(models.Model):
     height = models.CharField(max_length = 10)
     weight = models.CharField(max_length = 10)
     powers = models.TextField
+    STATS_CHOICES = (
+    ('1', 'Extremely Low'),
+    ('2', 'Very Low'),
+    ('3', 'Low'),
+    ('4', 'Average'),
+    ('5', 'Good'),
+    ('6', 'Above Average'),
+    ('7', 'High'),
+    ('8', 'Very High'),
+    ('9', 'Super Human'),
+    ('10', 'Above and Beyond'),
+
+)
     intelligence = models.CharField(max_length = 5, choices = STATS_CHOICES)
     stamina = models.CharField(max_length = 5, choices = STATS_CHOICES)
     strength = models.CharField(max_length = 5, choices = STATS_CHOICES)
